@@ -10,6 +10,8 @@ import { useRouter } from 'next/router';
 import Prismic from '@prismicio/client';
 /* import Cookies from 'js-cookie'; */
 import Link from 'next/link';
+import { ReactElement } from 'react';
+import Head from 'next/head';
 import Header from '../../components/Header';
 
 import { getPrismicClient } from '../../services/prismic';
@@ -59,7 +61,7 @@ export default function Post({
   post,
   navigation,
   preview,
-}: PostProps): JSX.Element {
+}: PostProps): ReactElement {
   const router = useRouter();
   if (router.isFallback) {
     return <h1>Carregando...</h1>;
@@ -98,6 +100,9 @@ export default function Post({
 
   return (
     <>
+      <Head>
+        <title>{post.data.title}</title>
+      </Head>
       <Header />
       <img src={post.data.banner.url} alt="imagem" className={styles.banner} />
       <main className={commonStyles.container}>
